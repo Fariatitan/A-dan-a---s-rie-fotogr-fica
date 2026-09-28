@@ -271,10 +271,10 @@
           </div>
         </div>
 
-        <!-- Recorte Editorial da Foto Pura -->
+        <!-- Recorte Editorial da Foto Pura (com caminhos web-safe e fallbacks) -->
         <div class="lg:col-span-7 flex justify-center lg:justify-end">
-          <div class="editorial-crop-wrapper w-full max-w-md h-[68vh]" onclick="openLightbox('./L1010570.JPG', 'A DANÇA — RECORTE EDITORIAL I', 'SÃO PAULO, DALLIDO.1988')">
-            <img src="./L1010570.JPG" alt="A Dança — Recorte Fotográfico" loading="eager">
+          <div class="editorial-crop-wrapper w-full max-w-md h-[68vh]" onclick="openLightbox('./foto-danca-01.jpg', 'A DANÇA — RECORTE EDITORIAL I', 'SÃO PAULO, DALLIDO.1988')">
+            <img src="./foto-danca-01.jpg" onerror="this.onerror=null; this.src='./L1010570.JPG';" alt="A Dança — Recorte Fotográfico" loading="eager">
           </div>
         </div>
       </div>
@@ -287,8 +287,8 @@
         
         <!-- Recorte de Detalhe -->
         <div class="lg:col-span-5 hidden lg:block">
-          <div class="editorial-crop-wrapper w-full h-[66vh]" onclick="openLightbox('./L1010571.JPG', 'A DANÇA — DETALHE SOMÁTICO', 'SÃO PAULO, DALLIDO.1988')">
-            <img src="./L1010571.JPG" alt="A Dança — Detalhe de movimento" loading="lazy">
+          <div class="editorial-crop-wrapper w-full h-[66vh]" onclick="openLightbox('./foto-danca-02.jpg', 'A DANÇA — DETALHE SOMÁTICO', 'SÃO PAULO, DALLIDO.1988')">
+            <img src="./foto-danca-02.jpg" onerror="this.onerror=null; this.src='./L1010571.JPG';" alt="A Dança — Detalhe de movimento" loading="lazy">
           </div>
         </div>
 
@@ -324,8 +324,8 @@
     <!-- SALA 03: QUADRO EMOLDURADO I (SALA LIMPA) -->
     <section class="slide-room" data-index="2">
       <div class="flex flex-col items-center justify-center">
-        <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto 001.jpg', 'A DANÇA — I', 'OBRA EMOLDURADA, SÃO PAULO, 2026')">
-          <img src="./mockup-canvas-preto 001.jpg" alt="A Dança I — Quadro Emoldurado" loading="lazy">
+        <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto-001.jpg', 'A DANÇA — I', 'OBRA EMOLDURADA, SÃO PAULO, 2026')">
+          <img src="./mockup-canvas-preto-001.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto%20001.jpg';" alt="A Dança I — Quadro Emoldurado" loading="lazy">
         </div>
 
         <div class="gallery-placard">
@@ -342,8 +342,8 @@
     <!-- SALA 04: QUADRO EMOLDURADO II (SALA LIMPA) -->
     <section class="slide-room" data-index="3">
       <div class="flex flex-col items-center justify-center">
-        <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto 002.jpg', 'A DANÇA — II', 'OBRA EMOLDURADA, SÃO PAULO, 2026')">
-          <img src="./mockup-canvas-preto 002.jpg" alt="A Dança II — Quadro Emoldurado" loading="lazy">
+        <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto-002.jpg', 'A DANÇA — II', 'OBRA EMOLDURADA, SÃO PAULO, 2026')">
+          <img src="./mockup-canvas-preto-002.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto%20002.jpg';" alt="A Dança II — Quadro Emoldurado" loading="lazy">
         </div>
 
         <div class="gallery-placard">
@@ -360,8 +360,8 @@
     <!-- SALA 05: QUADRO EMOLDURADO III (SALA LIMPA) -->
     <section class="slide-room" data-index="4">
       <div class="flex flex-col items-center justify-center">
-        <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto 003.jpg', 'A DANÇA — III', 'OBRA EMOLDURADA, SÃO PAULO, 2026')">
-          <img src="./mockup-canvas-preto 003.jpg" alt="A Dança III — Quadro Emoldurado" loading="lazy">
+        <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto-003.jpg', 'A DANÇA — III', 'OBRA EMOLDURADA, SÃO PAULO, 2026')">
+          <img src="./mockup-canvas-preto-003.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto%20003.jpg';" alt="A Dança III — Quadro Emoldurado" loading="lazy">
         </div>
 
         <div class="gallery-placard">
@@ -381,8 +381,8 @@
         
         <!-- Recorte Editorial -->
         <div class="lg:col-span-5 hidden lg:block">
-          <div class="editorial-crop-wrapper w-full h-[68vh]" onclick="openLightbox('./L1010576.JPG', 'A DANÇA — PRESENÇA SOMÁTICA', 'SÃO PAULO, DALLIDO.1988')">
-            <img src="./L1010576.JPG" alt="A Dança — Presença Somática" loading="lazy">
+          <div class="editorial-crop-wrapper w-full h-[68vh]" onclick="openLightbox('./foto-danca-03.jpg', 'A DANÇA — PRESENÇA SOMÁTICA', 'SÃO PAULO, DALLIDO.1988')">
+            <img src="./foto-danca-03.jpg" onerror="this.onerror=null; this.src='./L1010576.JPG';" alt="A Dança — Presença Somática" loading="lazy">
           </div>
         </div>
 
@@ -457,8 +457,8 @@
         </div>
 
         <!-- Quadro Final Emoldurado -->
-        <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto 003.jpg', 'A DANÇA — OBRA FINAL', 'SÃO PAULO, DALLIDO.1988')">
-          <img src="./mockup-canvas-preto 003.jpg" alt="A Dança — Quadro Final" loading="lazy">
+        <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto-003.jpg', 'A DANÇA — OBRA FINAL', 'SÃO PAULO, DALLIDO.1988')">
+          <img src="./mockup-canvas-preto-003.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto%20003.jpg';" alt="A Dança — Quadro Final" loading="lazy">
         </div>
       </div>
     </section>
