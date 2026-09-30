@@ -2,21 +2,21 @@
 <html lang="pt-BR" class="h-full bg-[#1E1E21]">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>DALLIDO.1988 — A DANÇA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     :root {
       --bg-graphite: #1E1E21;
-      --bg-graphite-deep: #161618;
+      --bg-graphite-deep: #141416;
       --bg-graphite-card: #252529;
       --text-main: #F2F1ED;
       --text-muted: #A4A29C;
       --text-faint: #63625D;
-      --line-graphite: rgba(255, 255, 255, 0.09);
+      --line-graphite: rgba(255, 255, 255, 0.08);
       --accent-silver: #D4D2CB;
     }
 
@@ -24,15 +24,18 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    body {
+    html, body {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      overflow: hidden;
       background-color: var(--bg-graphite);
       color: var(--text-main);
-      font-family: "Helvetica Neue", Helvetica, "Jost", "Futura", Arial, sans-serif;
+      font-family: "Jost", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: 300;
-      overflow: hidden;
-      user-select: none;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -48,31 +51,54 @@
     /* VIEWPORT HORIZONTAL DE SALAS */
     .viewport-container {
       width: 100vw;
-      height: 100vh;
+      height: 100%;
+      height: 100dvh;
       display: flex;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform;
     }
 
     .slide-room {
       width: 100vw;
-      height: 100vh;
+      height: 100%;
+      height: 100dvh;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 5.5rem 4rem 4.5rem 4rem;
       position: relative;
-      background: radial-gradient(circle at 50% 45%, #232327 0%, #1A1A1D 90%);
+      background: radial-gradient(circle at 50% 45%, #242428 0%, #171719 90%);
+      padding: 4.75rem 1.25rem 4.5rem 1.25rem;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
-    /* RECORTE EDITORIAL DA FOTO (FOTO PURA NÃO EMOLDURADA) */
+    @media (min-width: 768px) {
+      .slide-room {
+        padding: 5.5rem 3.5rem 4.75rem 3.5rem;
+        overflow-y: hidden;
+      }
+    }
+
+    /* Custom scrollbar suave para salas no mobile */
+    .slide-room::-webkit-scrollbar {
+      width: 4px;
+    }
+    .slide-room::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .slide-room::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 2px;
+    }
+
+    /* RECORTE EDITORIAL DA FOTO */
     .editorial-crop-wrapper {
       position: relative;
       overflow: hidden;
-      box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.65);
+      box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 1px;
+      border-radius: 2px;
       cursor: zoom-in;
     }
 
@@ -86,57 +112,100 @@
     }
 
     .editorial-crop-wrapper:hover img {
-      transform: scale(1.04);
+      transform: scale(1.03);
     }
 
-    /* QUADROS EMOLDURADOS (SALA ULTRA LIMPA) */
+    /* QUADROS EMOLDURADOS */
     .clean-framed-view {
       position: relative;
       cursor: zoom-in;
       display: inline-block;
       box-shadow: 
-        0 10px 30px -5px rgba(0, 0, 0, 0.6),
-        0 30px 80px -15px rgba(0, 0, 0, 0.8);
+        0 10px 25px -5px rgba(0, 0, 0, 0.6),
+        0 25px 60px -15px rgba(0, 0, 0, 0.85);
       border-radius: 1px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      max-width: 100%;
     }
 
     .clean-framed-view:hover {
-      transform: translateY(-4px);
+      transform: translateY(-3px);
       box-shadow: 
-        0 15px 40px -5px rgba(0, 0, 0, 0.7),
-        0 40px 100px -15px rgba(0, 0, 0, 0.9);
+        0 15px 35px -5px rgba(0, 0, 0, 0.7),
+        0 35px 80px -15px rgba(0, 0, 0, 0.95);
     }
 
     .clean-framed-view img {
-      max-height: 72vh;
-      max-width: 82vw;
+      max-height: 52vh;
+      max-width: 90vw;
       width: auto;
       height: auto;
       display: block;
       object-fit: contain;
     }
 
+    @media (min-width: 768px) {
+      .clean-framed-view img {
+        max-height: 68vh;
+        max-width: 78vw;
+      }
+    }
+
+    /* QUADROS EM SALAS SPLIT */
+    .split-artwork-frame {
+      position: relative;
+      cursor: zoom-in;
+      display: inline-block;
+      max-width: 100%;
+      box-shadow: 
+        0 10px 25px -5px rgba(0, 0, 0, 0.6),
+        0 25px 60px -15px rgba(0, 0, 0, 0.85);
+      border-radius: 1px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .split-artwork-frame:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .split-artwork-frame img {
+      max-height: 42vh;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    @media (min-width: 768px) {
+      .split-artwork-frame img {
+        max-height: 56vh;
+      }
+    }
+
     /* ETIQUETA DE GALERIA SUIÇA */
     .gallery-placard {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.65rem;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-top: 1.75rem;
+      margin-top: 1.25rem;
       text-align: center;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 0.75rem;
+      gap: 0.4rem 0.6rem;
     }
 
     /* BOTÕES DE NAVEGAÇÃO */
     .graphite-nav-btn {
-      width: 44px;
-      height: 44px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: var(--bg-graphite-card);
       border: 1px solid var(--line-graphite);
@@ -144,8 +213,15 @@
       align-items: center;
       justify-content: center;
       color: var(--text-main);
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
       cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+      .graphite-nav-btn {
+        width: 44px;
+        height: 44px;
+      }
     }
 
     .graphite-nav-btn:hover:not(:disabled) {
@@ -155,7 +231,7 @@
     }
 
     .graphite-nav-btn:disabled {
-      opacity: 0.15;
+      opacity: 0.2;
       cursor: not-allowed;
     }
 
@@ -164,14 +240,15 @@
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: rgba(12, 12, 14, 0.98);
-      backdrop-filter: blur(14px);
+      background: rgba(10, 10, 12, 0.96);
+      backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.35s ease;
+      padding: 1rem;
     }
 
     .lightbox-overlay.active {
@@ -181,55 +258,78 @@
 
     .lightbox-content {
       position: relative;
-      max-width: 94vw;
-      max-height: 90vh;
+      max-width: 96vw;
+      max-height: 90dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       cursor: zoom-out;
     }
 
     .lightbox-content img {
-      max-width: 94vw;
-      max-height: 88vh;
+      max-width: 92vw;
+      max-height: 76dvh;
       object-fit: contain;
-      box-shadow: 0 35px 100px rgba(0, 0, 0, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1px;
     }
 
     /* PROGRESSO */
     .graphite-progress {
       height: 1.5px;
       background: var(--text-main);
-      transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* CARD DE APRESENTAÇÃO */
     .graphite-editorial-card {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.025);
       border: 1px solid rgba(255, 255, 255, 0.07);
-      padding: 3.5rem;
-      border-radius: 1px;
+      padding: 1.5rem;
+      border-radius: 2px;
+    }
+
+    @media (min-width: 768px) {
+      .graphite-editorial-card {
+        padding: 3rem;
+      }
+    }
+
+    /* HINT DE ZOOM */
+    .zoom-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 0.5rem;
+      text-transform: uppercase;
     }
   </style>
 </head>
-<body class="h-full flex flex-col justify-between">
+<body class="h-full flex flex-col justify-between select-none">
 
   <!-- CABEÇALHO GRAFITE MINIMALISTA (FIXO) -->
-  <header class="fixed top-0 left-0 right-0 z-40 px-10 py-6 flex items-center justify-between border-b border-white/[0.08] bg-[#1E1E21]/90 backdrop-blur-md">
-    <div class="flex items-center gap-6">
-      <span class="font-futura text-lg tracking-[0.25em] text-white uppercase font-medium">
+  <header class="fixed top-0 left-0 right-0 z-40 px-4 sm:px-8 lg:px-10 py-3.5 sm:py-5 flex items-center justify-between border-b border-white/[0.08] bg-[#1E1E21]/90 backdrop-blur-md">
+    <div class="flex items-center gap-2.5 sm:gap-5">
+      <span class="font-futura text-sm sm:text-base lg:text-lg tracking-[0.2em] sm:tracking-[0.25em] text-white uppercase font-medium">
         DALLIDO.1988
       </span>
       <span class="text-white/20 text-xs">/</span>
-      <span class="font-mono text-[10px] tracking-[0.25em] text-[#A4A29C] uppercase">
-        A DANÇA &bull; SÃO PAULO
+      <span class="font-mono text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.25em] text-[#A4A29C] uppercase truncate max-w-[140px] sm:max-w-none">
+        A DANÇA
       </span>
     </div>
 
-    <div class="flex items-center gap-8">
-      <span id="roomIndicator" class="font-mono text-[10px] tracking-[0.25em] text-[#A4A29C]">
+    <div class="flex items-center gap-4 sm:gap-8">
+      <span id="roomIndicator" class="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[#A4A29C]">
         01 / 07
       </span>
-      <button onclick="toggleSound()" id="soundToggleBtn" class="font-mono text-[10px] tracking-widest text-[#A4A29C] hover:text-white transition flex items-center gap-1.5">
-        <span id="soundIcon">●</span> <span id="soundLabel">SOM</span>
+      <button onclick="toggleSound()" id="soundToggleBtn" class="font-mono text-[9px] sm:text-[10px] tracking-widest text-[#A4A29C] hover:text-white transition flex items-center gap-1.5 py-1 px-2 rounded bg-white/[0.03] border border-white/[0.06]" title="Alternar áudio tátil">
+        <span id="soundIcon" class="text-[8px] text-white">●</span> <span id="soundLabel">SOM</span>
       </button>
     </div>
   </header>
@@ -239,43 +339,44 @@
 
     <!-- SALA 01: ABERTURA COM RECORTE EDITORIAL DA FOTO PURA -->
     <section class="slide-room" data-index="0">
-      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-14 items-center my-auto">
         
-        <!-- Bloco Tipográfico Helvetica/Futura -->
-        <div class="lg:col-span-5 space-y-8 text-left">
-          <div class="space-y-3">
-            <span class="font-mono text-[9px] tracking-[0.4em] text-[#A4A29C] uppercase block">
+        <!-- Bloco Tipográfico -->
+        <div class="lg:col-span-5 space-y-4 sm:space-y-6 lg:space-y-8 text-left z-10 order-2 lg:order-1">
+          <div class="space-y-1.5 sm:space-y-3">
+            <span class="font-mono text-[8px] sm:text-[9px] tracking-[0.35em] sm:tracking-[0.4em] text-[#A4A29C] uppercase block">
               SÉRIE FOTOGRÁFICA
             </span>
-            <h1 class="font-futura text-6xl lg:text-7xl font-light tracking-[0.2em] uppercase text-white leading-[1.05]">
+            <h1 class="font-futura text-3xl sm:text-5xl lg:text-6xl font-light tracking-[0.16em] sm:tracking-[0.18em] uppercase text-white leading-[1.05]">
               A DANÇA
             </h1>
-            <p class="font-futura text-lg tracking-[0.2em] text-[#A4A29C] uppercase pt-1">
+            <p class="font-futura text-xs sm:text-base lg:text-lg tracking-[0.18em] sm:tracking-[0.2em] text-[#A4A29C] uppercase pt-0.5">
               SÃO PAULO
             </p>
           </div>
 
-          <div class="w-12 h-[1px] bg-white/20"></div>
+          <div class="w-10 sm:w-12 h-[1px] bg-white/20"></div>
 
-          <p class="text-xs text-[#A4A29C] leading-relaxed max-w-sm font-light tracking-wide">
+          <p class="text-xs sm:text-sm text-[#A4A29C] leading-relaxed max-w-sm font-light tracking-wide">
             Investigação visual sobre o movimento, a penumbra e a densidade inegociável da anatomia masculina.
           </p>
 
-          <div class="pt-4 flex items-center gap-4">
-            <button onclick="goToSlide(1)" class="px-6 py-3 bg-white text-[#1E1E21] text-xs font-mono tracking-[0.25em] uppercase hover:bg-[#D4D2CB] transition rounded-sm font-medium">
+          <div class="pt-1 sm:pt-2 flex items-center gap-3 sm:gap-4">
+            <button onclick="goToSlide(1)" class="px-5 sm:px-6 py-2.5 sm:py-3 bg-white text-[#1E1E21] text-[10px] sm:text-xs font-mono tracking-[0.22em] uppercase hover:bg-[#D4D2CB] transition rounded-sm font-medium shadow-md">
               EXPLORAR &rarr;
             </button>
-            <span class="font-mono text-[9px] text-[#63625D] tracking-widest">
+            <span class="font-mono text-[8px] sm:text-[9px] text-[#63625D] tracking-widest hidden sm:inline-block">
               [SETAS ← →]
             </span>
           </div>
         </div>
 
-        <!-- Recorte Editorial da Foto Pura (com caminhos web-safe e fallbacks) -->
-        <div class="lg:col-span-7 flex justify-center lg:justify-end">
-          <div class="editorial-crop-wrapper w-full max-w-md h-[68vh]" onclick="openLightbox('./foto-danca-01.jpg', 'A DANÇA — RECORTE EDITORIAL I', 'SÃO PAULO, DALLIDO.1988')">
+        <!-- Recorte Editorial da Foto Pura -->
+        <div class="lg:col-span-7 flex flex-col justify-center items-center lg:items-end order-1 lg:order-2">
+          <div class="editorial-crop-wrapper w-full max-w-[280px] sm:max-w-sm lg:max-w-md h-[34vh] sm:h-[48vh] lg:h-[58vh]" onclick="openLightbox('./foto-danca-01.jpg', 'A DANÇA — RECORTE EDITORIAL I', 'SÃO PAULO, DALLIDO.1988')">
             <img src="./foto-danca-01.jpg" onerror="this.onerror=null; this.src='./L1010570.JPG';" alt="A Dança — Recorte Fotográfico" loading="eager">
           </div>
+          <span class="zoom-hint">🔍 Toque para ampliar</span>
         </div>
       </div>
     </section>
@@ -283,27 +384,28 @@
 
     <!-- SALA 02: APRESENTAÇÃO COM RECORTE DE DETALHE -->
     <section class="slide-room" data-index="1">
-      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16 items-center my-auto">
         
         <!-- Recorte de Detalhe -->
-        <div class="lg:col-span-5 hidden lg:block">
-          <div class="editorial-crop-wrapper w-full h-[66vh]" onclick="openLightbox('./foto-danca-02.jpg', 'A DANÇA — DETALHE SOMÁTICO', 'SÃO PAULO, DALLIDO.1988')">
+        <div class="lg:col-span-5 hidden md:flex flex-col items-center">
+          <div class="editorial-crop-wrapper w-full h-[40vh] md:h-[54vh] lg:h-[64vh]" onclick="openLightbox('./foto-danca-02.jpg', 'A DANÇA — DETALHE SOMÁTICO', 'SÃO PAULO, DALLIDO.1988')">
             <img src="./foto-danca-02.jpg" onerror="this.onerror=null; this.src='./L1010571.JPG';" alt="A Dança — Detalhe de movimento" loading="lazy">
           </div>
+          <span class="zoom-hint">🔍 Toque para ampliar</span>
         </div>
 
         <!-- Texto de Apresentação em Helvetica/Futura -->
-        <div class="lg:col-span-7 graphite-editorial-card space-y-6 text-left max-w-xl">
-          <div class="space-y-2 border-b border-white/[0.08] pb-4">
-            <span class="font-mono text-[9px] tracking-[0.35em] text-[#A4A29C] uppercase block">
+        <div class="lg:col-span-7 graphite-editorial-card space-y-4 sm:space-y-6 text-left max-w-xl mx-auto w-full">
+          <div class="space-y-1.5 border-b border-white/[0.08] pb-3 sm:pb-4">
+            <span class="font-mono text-[8px] sm:text-[9px] tracking-[0.3em] text-[#A4A29C] uppercase block">
               APRESENTAÇÃO EDITORIAL
             </span>
-            <h2 class="font-futura text-2xl lg:text-3xl font-light text-white tracking-[0.12em] uppercase">
+            <h2 class="font-futura text-lg sm:text-2xl lg:text-3xl font-light text-white tracking-[0.1em] sm:tracking-[0.12em] uppercase leading-tight">
               A Fricção dos Corpos e o Foco no Masculino
             </h2>
           </div>
 
-          <div class="space-y-4 text-[#D4D2CB] text-sm lg:text-base font-light leading-relaxed text-justify tracking-wide">
+          <div class="space-y-3 sm:space-y-4 text-[#D4D2CB] text-xs sm:text-sm lg:text-base font-light leading-relaxed text-justify tracking-wide">
             <p>
               A série <strong>A Dança</strong> investiga a anatomia do movimento noturno e a densidade dos corpos na penumbra de São Paulo. Ao recusar o retrato convencional e a nitidez fisionômica, a câmera não busca a identidade civil do indivíduo, mas a sua presença somática: a pulsação do músculo, o ritmo da celebração e o magnetismo da matéria viva.
             </p>
@@ -312,7 +414,7 @@
             </p>
           </div>
 
-          <div class="pt-2 flex items-center justify-between text-[9px] font-mono tracking-widest text-[#A4A29C] uppercase border-t border-white/[0.08]">
+          <div class="pt-2 flex items-center justify-between text-[8px] sm:text-[9px] font-mono tracking-widest text-[#A4A29C] uppercase border-t border-white/[0.08]">
             <span>DALLIDO.1988</span>
             <span>SÃO PAULO</span>
           </div>
@@ -323,13 +425,14 @@
 
     <!-- SALA 03: QUADRO EMOLDURADO I (SALA LIMPA) -->
     <section class="slide-room" data-index="2">
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center my-auto w-full">
         <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto-001.jpg', 'A DANÇA — I', 'OBRA EMOLDURADA, SÃO PAULO, 2026')">
-          <img src="./mockup-canvas-preto-001.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto%20001.jpg';" alt="A Dança I — Quadro Emoldurado" loading="lazy">
+          <img src="./mockup-canvas-preto-001.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto 001.jpg';" alt="A Dança I — Quadro Emoldurado" loading="lazy">
         </div>
+        <span class="zoom-hint">🔍 Toque para ampliar</span>
 
         <div class="gallery-placard">
-          <span class="font-futura text-xs text-white tracking-[0.2em] font-normal">A DANÇA — I</span>
+          <span class="font-futura text-xs sm:text-sm text-white tracking-[0.2em] font-normal">A DANÇA — I</span>
           <span>&bull;</span>
           <span>DALLIDO.1988</span>
           <span>&bull;</span>
@@ -341,13 +444,14 @@
 
     <!-- SALA 04: QUADRO EMOLDURADO II (SALA LIMPA) -->
     <section class="slide-room" data-index="3">
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center my-auto w-full">
         <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto-002.jpg', 'A DANÇA — II', 'OBRA EMOLDURADA, SÃO PAULO, 2026')">
-          <img src="./mockup-canvas-preto-002.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto%20002.jpg';" alt="A Dança II — Quadro Emoldurado" loading="lazy">
+          <img src="./mockup-canvas-preto-002.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto 002.jpg';" alt="A Dança II — Quadro Emoldurado" loading="lazy">
         </div>
+        <span class="zoom-hint">🔍 Toque para ampliar</span>
 
         <div class="gallery-placard">
-          <span class="font-futura text-xs text-white tracking-[0.2em] font-normal">A DANÇA — II</span>
+          <span class="font-futura text-xs sm:text-sm text-white tracking-[0.2em] font-normal">A DANÇA — II</span>
           <span>&bull;</span>
           <span>DALLIDO.1988</span>
           <span>&bull;</span>
@@ -359,13 +463,14 @@
 
     <!-- SALA 05: QUADRO EMOLDURADO III (SALA LIMPA) -->
     <section class="slide-room" data-index="4">
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center my-auto w-full">
         <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto-003.jpg', 'A DANÇA — III', 'OBRA EMOLDURADA, SÃO PAULO, 2026')">
-          <img src="./mockup-canvas-preto-003.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto%20003.jpg';" alt="A Dança III — Quadro Emoldurado" loading="lazy">
+          <img src="./mockup-canvas-preto-003.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto 003.jpg';" alt="A Dança III — Quadro Emoldurado" loading="lazy">
         </div>
+        <span class="zoom-hint">🔍 Toque para ampliar</span>
 
         <div class="gallery-placard">
-          <span class="font-futura text-xs text-white tracking-[0.2em] font-normal">A DANÇA — III</span>
+          <span class="font-futura text-xs sm:text-sm text-white tracking-[0.2em] font-normal">A DANÇA — III</span>
           <span>&bull;</span>
           <span>DALLIDO.1988</span>
           <span>&bull;</span>
@@ -377,43 +482,44 @@
 
     <!-- SALA 06: TESTEMUNHO COM RECORTE FOTOGRÁFICO -->
     <section class="slide-room" data-index="5">
-      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16 items-center my-auto">
         
         <!-- Recorte Editorial -->
-        <div class="lg:col-span-5 hidden lg:block">
-          <div class="editorial-crop-wrapper w-full h-[68vh]" onclick="openLightbox('./foto-danca-03.jpg', 'A DANÇA — PRESENÇA SOMÁTICA', 'SÃO PAULO, DALLIDO.1988')">
+        <div class="lg:col-span-5 hidden md:flex flex-col items-center">
+          <div class="editorial-crop-wrapper w-full h-[40vh] md:h-[54vh] lg:h-[64vh]" onclick="openLightbox('./foto-danca-03.jpg', 'A DANÇA — PRESENÇA SOMÁTICA', 'SÃO PAULO, DALLIDO.1988')">
             <img src="./foto-danca-03.jpg" onerror="this.onerror=null; this.src='./L1010576.JPG';" alt="A Dança — Presença Somática" loading="lazy">
           </div>
+          <span class="zoom-hint">🔍 Toque para ampliar</span>
         </div>
 
         <!-- Citações em Helvetica/Futura -->
-        <div class="lg:col-span-7 graphite-editorial-card space-y-8 text-left max-w-xl">
-          <div class="space-y-1 border-b border-white/[0.08] pb-4">
-            <span class="font-mono text-[9px] tracking-[0.35em] text-[#A4A29C] uppercase block">
+        <div class="lg:col-span-7 graphite-editorial-card space-y-4 sm:space-y-6 text-left max-w-xl mx-auto w-full">
+          <div class="space-y-1 border-b border-white/[0.08] pb-3">
+            <span class="font-mono text-[8px] sm:text-[9px] tracking-[0.3em] text-[#A4A29C] uppercase block">
               TESTEMUNHO DE LEITURA DA SÉRIE
             </span>
           </div>
 
-          <div class="space-y-6 text-sm lg:text-base leading-relaxed tracking-wide">
-            <blockquote class="pl-4 border-l border-white text-white font-light">
+          <div class="space-y-3.5 sm:space-y-5 text-xs sm:text-sm lg:text-base leading-relaxed tracking-wide">
+            <blockquote class="pl-3 sm:pl-4 border-l border-white text-white font-light">
               <p>
                 “Não se vê com nitidez rosto, cara, mas você vê um corpo. existe a presença, nas fotos existe inclusive mt movimento, a festa está presente”
               </p>
             </blockquote>
 
-            <blockquote class="pl-4 border-l border-white/30 text-[#A4A29C]">
+            <blockquote class="pl-3 sm:pl-4 border-l border-white/30 text-[#A4A29C]">
               <p>
                 “E sobretudo o foco no masculino”
               </p>
             </blockquote>
 
-            <blockquote class="pl-4 border-l border-white text-white font-light">
+            <blockquote class="pl-3 sm:pl-4 border-l border-white text-white font-light">
               <p>
                 “O homem, o corpo do homem, sensualidade, virilidade descontraída, mas a medida inclusive que o carrossel vai andando essa descontração revela um foco, um ponto de olhar, uma representação do homem, o volume, o pau, que estão ali, não saem dali, nunca sai dali, nunca vai sair de homem algum”
               </p>
             </blockquote>
 
-            <blockquote class="pl-4 border-l border-white/30 text-[#A4A29C]">
+            <blockquote class="pl-3 sm:pl-4 border-l border-white/30 text-[#A4A29C]">
               <p>
                 “E que o homem sabe que existe, e que por mais descontraído que esteja esse homem, ele provoca o olhar e ele gosta”
               </p>
@@ -426,39 +532,44 @@
 
     <!-- SALA 07: ENCERRAMENTO -->
     <section class="slide-room" data-index="6">
-      <div class="max-w-5xl w-full flex flex-col lg:flex-row-reverse items-center justify-between gap-12">
-        <div class="space-y-6 text-left max-w-md">
-          <div class="space-y-2">
-            <span class="font-mono text-[9px] tracking-[0.35em] text-[#A4A29C] uppercase block">
+      <div class="max-w-5xl w-full grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-14 items-center my-auto">
+        
+        <!-- Bloco Texto Encerramento -->
+        <div class="lg:col-span-5 space-y-4 sm:space-y-6 text-left z-10 order-2 lg:order-1">
+          <div class="space-y-1.5">
+            <span class="font-mono text-[8px] sm:text-[9px] tracking-[0.3em] text-[#A4A29C] uppercase block">
               ENCERRAMENTO
             </span>
-            <h2 class="font-futura text-5xl lg:text-6xl font-light tracking-[0.2em] uppercase text-white leading-tight">
+            <h2 class="font-futura text-2xl sm:text-4xl lg:text-5xl font-light tracking-[0.18em] uppercase text-white leading-tight">
               A DANÇA
             </h2>
-            <p class="font-futura text-lg tracking-[0.2em] text-[#A4A29C] uppercase">
+            <p class="font-futura text-xs sm:text-base lg:text-lg tracking-[0.18em] text-[#A4A29C] uppercase">
               SÃO PAULO
             </p>
-            <p class="font-mono text-xs text-white tracking-widest pt-2">
+            <p class="font-mono text-[10px] sm:text-xs text-white tracking-widest pt-1">
               DALLIDO.1988
             </p>
           </div>
 
-          <div class="w-12 h-[1px] bg-white/20 my-6"></div>
+          <div class="w-10 sm:w-12 h-[1px] bg-white/20 my-2 sm:my-3"></div>
 
-          <p class="text-xs text-[#A4A29C] leading-relaxed font-light tracking-wide">
+          <p class="text-xs sm:text-sm text-[#A4A29C] leading-relaxed font-light tracking-wide max-w-sm">
             Sem conclusão explicativa. A experiência visual encerra-se deixando a série aberta à contemplação e à interpretação.
           </p>
 
-          <div class="pt-4">
-            <button onclick="goToSlide(0)" class="px-5 py-2.5 bg-transparent border border-white/20 rounded-sm text-xs font-mono tracking-[0.2em] uppercase text-white hover:border-white transition">
+          <div class="pt-1 sm:pt-2">
+            <button onclick="goToSlide(0)" class="px-4 sm:px-5 py-2 sm:py-2.5 bg-transparent border border-white/20 rounded-sm text-[10px] sm:text-xs font-mono tracking-[0.2em] uppercase text-white hover:border-white transition">
               &larr; REINICIAR
             </button>
           </div>
         </div>
 
         <!-- Quadro Final Emoldurado -->
-        <div class="clean-framed-view" onclick="openLightbox('./mockup-canvas-preto-003.jpg', 'A DANÇA — OBRA FINAL', 'SÃO PAULO, DALLIDO.1988')">
-          <img src="./mockup-canvas-preto-003.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto%20003.jpg';" alt="A Dança — Quadro Final" loading="lazy">
+        <div class="lg:col-span-7 flex flex-col justify-center items-center lg:items-end order-1 lg:order-2">
+          <div class="split-artwork-frame" onclick="openLightbox('./mockup-canvas-preto-003.jpg', 'A DANÇA — OBRA FINAL', 'SÃO PAULO, DALLIDO.1988')">
+            <img src="./mockup-canvas-preto-003.jpg" onerror="this.onerror=null; this.src='./mockup-canvas-preto 003.jpg';" alt="A Dança — Quadro Final" loading="lazy">
+          </div>
+          <span class="zoom-hint">🔍 Toque para ampliar</span>
         </div>
       </div>
     </section>
@@ -467,25 +578,25 @@
 
 
   <!-- BARRA INFERIOR GRAFITE (FIXA) -->
-  <footer class="fixed bottom-0 left-0 right-0 z-40 px-10 py-5 flex items-center justify-between border-t border-white/[0.08] bg-[#1E1E21]/90 backdrop-blur-md">
-    <div class="flex items-center gap-4">
+  <footer class="fixed bottom-0 left-0 right-0 z-40 px-4 sm:px-8 lg:px-10 py-3 sm:py-4 flex items-center justify-between border-t border-white/[0.08] bg-[#1E1E21]/90 backdrop-blur-md">
+    <div class="flex items-center gap-2 sm:gap-4">
       <button id="btnPrev" onclick="prevSlide()" class="graphite-nav-btn" aria-label="Sala Anterior">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
+        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
       </button>
       <button id="btnNext" onclick="nextSlide()" class="graphite-nav-btn" aria-label="Próxima Sala">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
       </button>
-      <span class="text-[11px] font-mono text-[#A4A29C] hidden sm:inline ml-3 tracking-wider">
-        USE AS SETAS OU CLIQUE NAS OBRAS PARA AMPLIAR
+      <span class="text-[10px] sm:text-[11px] font-mono text-[#A4A29C] hidden md:inline ml-2 tracking-wider">
+        SETAS ← → OU DESLIZE NA TELA
       </span>
     </div>
 
     <!-- Barra de Progresso Grafite -->
-    <div class="w-40 bg-white/10 h-[1.5px] rounded-full overflow-hidden hidden md:block">
+    <div class="w-24 sm:w-36 md:w-44 bg-white/10 h-[1.5px] rounded-full overflow-hidden">
       <div id="progressFill" class="graphite-progress" style="width: 14.28%;"></div>
     </div>
 
-    <div class="font-mono text-[9px] text-[#A4A29C] tracking-[0.2em] uppercase">
+    <div class="font-mono text-[8px] sm:text-[9px] text-[#A4A29C] tracking-[0.18em] sm:tracking-[0.2em] uppercase">
       &copy; 2026 DALLIDO.1988
     </div>
   </footer>
@@ -493,13 +604,13 @@
 
   <!-- LIGHTBOX MODAL DE ZOOM -->
   <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox()">
-    <button class="absolute top-6 right-8 text-white/70 hover:text-white font-mono text-xs tracking-widest z-50 flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/10">
+    <button onclick="closeLightbox()" class="absolute top-4 right-4 sm:top-6 sm:right-8 text-white/80 hover:text-white font-mono text-[10px] sm:text-xs tracking-widest z-50 flex items-center gap-1.5 sm:gap-2 bg-black/60 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/15 backdrop-blur-md">
       <span>FECHAR</span> <span>&times;</span>
     </button>
     
     <div class="lightbox-content" onclick="event.stopPropagation()">
       <img id="lightboxImg" src="" alt="Ampliação de Obra">
-      <div id="lightboxMeta" class="absolute bottom-4 left-6 right-6 text-center font-futura text-white text-xs tracking-[0.2em] uppercase bg-black/75 py-2.5 px-4 rounded backdrop-blur-md border border-white/10">
+      <div id="lightboxMeta" class="w-full text-center font-futura text-white text-[10px] sm:text-xs tracking-[0.16em] uppercase bg-black/80 py-2 sm:py-2.5 px-3 sm:px-4 mt-2 sm:mt-3 rounded backdrop-blur-md border border-white/10">
       </div>
     </div>
   </div>
@@ -510,37 +621,86 @@
     let currentSlide = 0;
     const totalSlides = 7;
     let soundEnabled = true;
+    let audioCtx = null;
 
-    // SOM TÁTIL MECÂNICO
+    // Inicialização do AudioContext com desbloqueio
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+          audioCtx = new AudioContextClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function unlockAudio() {
+      getAudioContext();
+      window.removeEventListener('click', unlockAudio);
+      window.removeEventListener('keydown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+    }
+    window.addEventListener('click', unlockAudio, { passive: true });
+    window.addEventListener('keydown', unlockAudio, { passive: true });
+    window.addEventListener('touchstart', unlockAudio, { passive: true });
+
+    // Som de obturador tátil analógico
     function playTactileClick() {
       if (!soundEnabled) return;
       try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContext) return;
-        const ctx = new AudioContext();
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        if (ctx.state === 'suspended') ctx.resume();
 
+        const t = ctx.currentTime;
+
+        // Ruído do obturador
+        const bufferSize = Math.floor(ctx.sampleRate * 0.028);
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.006));
+        }
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const noiseFilter = ctx.createBiquadFilter();
+        noiseFilter.type = "bandpass";
+        noiseFilter.frequency.setValueAtTime(3200, t);
+        noiseFilter.Q.setValueAtTime(2.2, t);
+
+        const noiseGain = ctx.createGain();
+        noiseGain.gain.setValueAtTime(0.4, t);
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.028);
+
+        noise.connect(noiseFilter);
+        noiseFilter.connect(noiseGain);
+        noiseGain.connect(ctx.destination);
+
+        // Click somático
         const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        const filter = ctx.createBiquadFilter();
+        const oscGain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(580, t);
+        osc.frequency.exponentialRampToValueAtTime(80, t + 0.022);
 
-        filter.type = "bandpass";
-        filter.frequency.value = 2600;
-        filter.Q.value = 5;
+        oscGain.gain.setValueAtTime(0.35, t);
+        oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.025);
 
-        osc.type = "triangle";
-        osc.frequency.setValueAtTime(240, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.03);
+        osc.connect(oscGain);
+        oscGain.connect(ctx.destination);
 
-        gain.gain.setValueAtTime(0.12, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.035);
-
-        osc.connect(filter);
-        filter.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start();
-        osc.stop(ctx.currentTime + 0.04);
-      } catch (e) {}
+        noise.start(t);
+        noise.stop(t + 0.03);
+        osc.start(t);
+        osc.stop(t + 0.028);
+      } catch (e) {
+        // Silencioso em caso de restrição de áudio
+      }
     }
 
     function toggleSound() {
@@ -563,6 +723,12 @@
 
       document.getElementById('btnPrev').disabled = (currentSlide === 0);
       document.getElementById('btnNext').disabled = (currentSlide === totalSlides - 1);
+
+      // Scroll para o topo da sala ao entrar (mobile)
+      const activeSection = document.querySelector(`.slide-room[data-index="${currentSlide}"]`);
+      if (activeSection) {
+        activeSection.scrollTop = 0;
+      }
     }
 
     function nextSlide() {
@@ -606,18 +772,35 @@
       }
     });
 
-    // TOUCH SWIPE
+    // TOUCH SWIPE INTELIGENTE (Distinção entre scroll vertical e troca de sala horizontal)
     let touchStartX = 0;
+    let touchStartY = 0;
     let touchEndX = 0;
+    let touchEndY = 0;
 
     window.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
     }, { passive: true });
 
     window.addEventListener('touchend', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox && lightbox.classList.contains('active')) return;
+
       touchEndX = e.changedTouches[0].screenX;
-      if (touchEndX < touchStartX - 50) nextSlide();
-      else if (touchEndX > touchStartX + 50) prevSlide();
+      touchEndY = e.changedTouches[0].screenY;
+
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      // Só aciona troca de sala se o gesto for predominantemente horizontal e tiver deslocamento suficiente
+      if (Math.abs(diffX) > Math.abs(diffY) * 1.5 && Math.abs(diffX) > 45) {
+        if (diffX < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
     }, { passive: true });
 
     // ZOOM LIGHTBOX
